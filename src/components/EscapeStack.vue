@@ -4,10 +4,12 @@
       style="
         position: relative;
         padding-top: 100px;
-        height: 300px;
+        height: 600px;
         width: 200px;
+        cursor: pointer;
         background-color: DarkOliveGreen;
       "
+      :style="showErrorOutline ? 'outline: red solid;' : ''"
       @click="moveCardThere()"
     >
       <GameCard
@@ -15,9 +17,10 @@
         v-for="(card, index) in cards"
         :key="index"
         :positionZ="index"
-        :isFaceUp="index === cards.length - 1"
+        :isFaceUp="true"
         :cardNumber="card.cardNumber"
         :color="card.color"
+        :offsetY="60"
       />
       <div v-if="cards.length === 0"></div>
     </div>
@@ -32,6 +35,11 @@ import { cardNumbers } from "@/utils/types.js";
 export default {
   props: {
     cards: Array,
+  },
+  data: function () {
+    return {
+      showErrorOutline: false,
+    };
   },
   components: {
     GameCard,
@@ -69,6 +77,10 @@ export default {
     },
     clearCards() {
       this.$emit("clear-card-here", this.$vnode.key);
+    },
+    showErrorImpossibleMove() {
+      this.showErrorOutline = true;
+      setTimeout(() => (this.showErrorOutline = false), 500);
     },
   },
 };

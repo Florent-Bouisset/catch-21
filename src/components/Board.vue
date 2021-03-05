@@ -40,6 +40,8 @@ export default {
       if (this.isMovingAllowed(stackIndex)) {
         const cardToMove = this.drawStack.pop();
         this.stacks[stackIndex].push(cardToMove);
+      } else {
+        this.$refs.escapeStacks[stackIndex].showErrorImpossibleMove();
       }
     },
     isMovingAllowed(stackIndex) {

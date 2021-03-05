@@ -30,6 +30,7 @@ export default {
     cardNumber: String,
     isFaceUp: Boolean,
     positionZ: Number,
+    offsetY: Number,
   },
   computed: {
     textDisplayed() {
@@ -51,7 +52,9 @@ export default {
       return mapping[this.cardNumber];
     },
     computedStyle() {
-      return `position: absolute; top: ${this.positionZ * -2}px; left: 0px`;
+      return `position: absolute; top: ${
+        this.positionZ * this.offsetY
+      }px; left: 0px`;
     },
   },
 };

@@ -7,7 +7,7 @@ export default class Deck {
     constructor() {
         this.cards = [];
         this.create();
-        this.createEasy();
+        //this.createEasy();
     }
 
     create() {
@@ -27,7 +27,7 @@ export default class Deck {
         for (let i = 0; i < 52; i++) {
             cards.push({
                 color: 'SPADE',
-                cardNumber: 'SEVEN',
+                cardNumber: 'THREE',
             });
 
         }

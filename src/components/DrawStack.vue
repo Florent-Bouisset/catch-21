@@ -1,16 +1,17 @@
 <template>
   <v-container>
+    <div>Remaining cards : {{ this.remainingCards }}</div>
+
     <div style="position: relative; margin-top: 100px">
       <GameCard
-        :v-if="cards.length > 0"
         v-for="(card, index) in cards"
         :key="index"
         :positionZ="index"
         :isFaceUp="index === cards.length - 1"
         :cardNumber="card.cardNumber"
         :color="card.color"
+        :offsetY="-2"
       />
-      <div v-if="cards.length === 0" />
     </div>
   </v-container>
 </template>
@@ -27,6 +28,9 @@ export default {
     nextCardValue() {
       const nextCardIndex = this.cards.length - 1;
       return this.getCardValue(this.cards[nextCardIndex]);
+    },
+    remainingCards() {
+      return this.cards.length;
     },
   },
   methods: {
