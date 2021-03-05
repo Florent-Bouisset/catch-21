@@ -1,18 +1,18 @@
 <template>
   <v-app>
     <v-main>
-      <Card />
+      <Deck></Deck>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Card from "./components/Card";
+import Deck from "./components/Deck";
 
 export default {
   name: "App",
 
-  components: { Card },
+  components: { Deck },
 
   data: () => ({
     //
