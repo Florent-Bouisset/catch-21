@@ -15,7 +15,8 @@ export default class Deck {
             for (const number in cardNumbers) {
                 cards.push({
                     color: color,
-                    cardNumber: number
+                    cardNumber: number,
+                    isFaceUp: true
                 });
             }
         }

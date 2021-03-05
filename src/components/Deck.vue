@@ -1,17 +1,20 @@
 <template>
   <v-container>
-    <GameCard
+    <Stack :cards="deck.cards"></Stack>
+    <!-- <GameCard
       v-for="(card, index) in deck.cards"
       :key="index"
+      :isFaceUp="false"
       :cardNumber="card.cardNumber"
       :color="card.color"
-    ></GameCard>
+    ></GameCard> -->
   </v-container>
 </template>
 
 <script>
 import Deck from "@/utils/deck";
-import GameCard from "@/components/Card.vue";
+// import GameCard from "@/components/Card.vue";
+import Stack from "@/components/Stack.vue";
 
 export default {
   data: function () {
@@ -24,7 +27,8 @@ export default {
     this.deck.shuffle();
   },
   components: {
-    GameCard,
+    // GameCard,
+    Stack,
   },
 };
 </script>

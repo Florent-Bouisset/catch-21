@@ -1,17 +1,25 @@
 <template>
-  <v-card class="ma-6" max-width="150" outlined>
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">
-          {{ this.textDisplayed }}
-        </v-list-item-title>
-      </v-list-item-content>
+  <v-card class="ma-6" width="150" height="150" outlined :style="computedStyle">
+    <div v-if="isFaceUp === true" class="d-flex flex-row">
+      <h1 class="ma-4">
+        {{ this.textDisplayed }}
+      </h1>
       <v-img
+        class="ma-4"
         :src="require(`@/assets/colors/${color}.png`)"
         max-height="72"
         max-width="48"
       /><v-img />
-    </v-list-item>
+    </div>
+    <div v-if="!isFaceUp">
+      <v-img
+        :v-if="isFaceUp === false"
+        :src="require(`@/assets/cards/back.png`)"
+        max-height="150"
+        max-width="150"
+        contain
+      /><v-img />
+    </div>
   </v-card>
 </template>
 
@@ -22,6 +30,8 @@ export default {
   props: {
     color: String,
     cardNumber: String,
+    isFaceUp: Boolean,
+    positionZ: Number,
   },
   computed: {
     textDisplayed() {
@@ -41,6 +51,9 @@ export default {
         KING: "K",
       };
       return mapping[this.cardNumber];
+    },
+    computedStyle() {
+      return `position: absolute; top: ${200 + this.positionZ * -2}px;`;
     },
   },
 };
