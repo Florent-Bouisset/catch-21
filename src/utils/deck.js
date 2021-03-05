@@ -7,6 +7,7 @@ export default class Deck {
     constructor() {
         this.cards = [];
         this.create();
+        this.createEasy();
     }
 
     create() {
@@ -16,9 +17,19 @@ export default class Deck {
                 cards.push({
                     color: color,
                     cardNumber: number,
-                    isFaceUp: true
                 });
             }
+        }
+        this.cards = cards;
+    }
+    createEasy() {
+        const cards = [];
+        for (let i = 0; i < 52; i++) {
+            cards.push({
+                color: 'SPADE',
+                cardNumber: 'SEVEN',
+            });
+
         }
         this.cards = cards;
     }

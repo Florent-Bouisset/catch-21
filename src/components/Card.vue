@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-6" width="150" height="150" outlined :style="computedStyle">
+  <v-card class="pa-0" width="150" height="210" outlined :style="computedStyle">
     <div v-if="isFaceUp === true" class="d-flex flex-row">
       <h1 class="ma-4">
         {{ this.textDisplayed }}
@@ -11,15 +11,13 @@
         max-width="48"
       /><v-img />
     </div>
-    <div v-if="!isFaceUp">
-      <v-img
-        :v-if="isFaceUp === false"
-        :src="require(`@/assets/cards/back.png`)"
-        max-height="150"
-        max-width="150"
-        contain
-      /><v-img />
-    </div>
+    <v-img
+      v-if="isFaceUp === false"
+      :src="require(`@/assets/cards/back.png`)"
+      height="210"
+      width="150"
+      contain
+    /><v-img />
   </v-card>
 </template>
 
@@ -53,7 +51,7 @@ export default {
       return mapping[this.cardNumber];
     },
     computedStyle() {
-      return `position: absolute; top: ${200 + this.positionZ * -2}px;`;
+      return `position: absolute; top: ${this.positionZ * -2}px; left: 0px`;
     },
   },
 };

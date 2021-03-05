@@ -1,18 +1,18 @@
 <template>
   <v-app>
     <v-main>
-      <Deck></Deck>
+      <Board></Board>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Deck from "./components/Deck";
+import Board from "./components/Board";
 
 export default {
   name: "App",
 
-  components: { Deck },
+  components: { Board },
 
   data: () => ({
     //
