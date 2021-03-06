@@ -7,7 +7,7 @@ export default class Deck {
     constructor() {
         this.cards = [];
         this.create();
-        //this.createEasy();
+        this.createEasy();
     }
 
     create() {
@@ -22,12 +22,13 @@ export default class Deck {
         }
         this.cards = cards;
     }
+    // Function for cheating and have a deck full of the same card
     createEasy() {
         const cards = [];
         for (let i = 0; i < 52; i++) {
             cards.push({
                 color: 'SPADE',
-                cardNumber: 'ACE',
+                cardNumber: 'SEVEN',
             });
         }
         this.cards = cards;

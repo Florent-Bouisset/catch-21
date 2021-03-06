@@ -10,7 +10,7 @@
       ref="discardStack"
       @discard-a-card="discardCard()"
     />
-    <Score></Score>
+    <Score ref="score"></Score>
     <div class="d-flex flex-row" fluid style="background-color: SeaGreen">
       <EscapeStack
         v-for="(stack, index) in stacks"
@@ -18,7 +18,7 @@
         :cards="stack"
         ref="escapeStacks"
         @move-card-here="moveACard"
-        @score-and-clear-stack="empyStack"
+        @score-and-clear-stack="scoreAndClear"
       />
     </div>
   </v-container>
@@ -71,10 +71,11 @@ export default {
       const sumBefore = Math.min(possibleSums);
       const nextCardValue = this.$refs.drawStack.nextCardValue;
       if (sumBefore + nextCardValue > 21) return false;
-
       return true;
     },
-    empyStack(stackIndex) {
+    scoreAndClear(stackIndex, comboArray) {
+      const currentTurn = 52 - this.drawStack.length;
+      this.$refs.score.scoreACombo(comboArray, currentTurn);
       this.$set(this.stacks, stackIndex, []);
     },
   },
