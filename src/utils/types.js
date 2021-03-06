@@ -1,5 +1,5 @@
 export const cardNumbers = Object.freeze({
-    ONE: 1,
+    ACE: 1,
     TWO: 2,
     THREE: 3,
     FOUR: 4,
@@ -20,3 +20,9 @@ export const colors = Object.freeze({
     HEART: 3,
     SPADE: 4,
 });
+
+export const scoreName = Object.freeze({
+    FIVE_CARD_CHARLIE: 1,
+    BLACK_JACK_ATTACK: 2,
+    CATCH_21: 3,
+})

@@ -27,9 +27,8 @@ export default class Deck {
         for (let i = 0; i < 52; i++) {
             cards.push({
                 color: 'SPADE',
-                cardNumber: 'THREE',
+                cardNumber: 'ACE',
             });
-
         }
         this.cards = cards;
     }
@@ -46,5 +45,13 @@ export default class Deck {
             this.cards[i] = this.cards[cardToSwap]
             this.cards[cardToSwap] = tmp
         }
+    }
+    static isABlackJack(card) {
+        if (card.cardNumber === "JACK") {
+            if (card.color === "SPADE" || card.color === "CLUB") {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -22,15 +22,20 @@
         :color="card.color"
         :offsetY="60"
       />
-      <div v-if="cards.length === 0"></div>
     </div>
-    <h3>{{ this.sum }}</h3>
+    <div class="d-flex">
+      <h3 class="pr-2" v-for="(sumPossibility, index) in sums" :key="index">
+        <template v-if="index > 0">OR</template>
+        {{ sumPossibility }}
+      </h3>
+    </div>
   </v-container>
 </template>
 
 <script>
 import GameCard from "@/components/Card.vue";
-import { cardNumbers } from "@/utils/types.js";
+import { cardNumbers, scoreName } from "@/utils/types.js";
+import Deck from "@/utils/deck";
 
 export default {
   props: {
@@ -45,12 +50,25 @@ export default {
     GameCard,
   },
   computed: {
-    sum() {
-      let sum = 0;
+    sums() {
+      let sumOfCards = 0;
+      let sumsOfCards = [];
+      let isThereAce = false;
       for (let i = 0; i < this.cards.length; i++) {
-        sum += this.getCardValue(this.cards[i]);
+        sumOfCards = sumOfCards + this.getCardValue(this.cards[i]);
+        if (this.cards[i].cardNumber === "ACE") {
+          isThereAce = true;
+        }
       }
-      return sum;
+
+      sumsOfCards.push(sumOfCards);
+      // Ace count for 1 or 11
+      const sumWithAceHighValue = sumOfCards + 10;
+      if (isThereAce && sumWithAceHighValue <= 21) {
+        sumsOfCards.push(sumWithAceHighValue);
+      }
+      //return sums;
+      return sumsOfCards;
     },
     cardLength() {
       return this.cards.length;
@@ -58,22 +76,38 @@ export default {
   },
   watch: {
     cards: function () {
-      if (this.sum === 21) this.$emit("stack-is-21", this.$vnode.key);
+      const scoreTrigger = [];
+      if (this.sums.includes(21)) {
+        scoreTrigger.push(scoreName.CATCH_21);
+      }
+      if (this.isFiveCardCharlie()) {
+        scoreTrigger.push(scoreName.FIVE_CARD_CHARLIE);
+      }
+      if (this.isBlackJack()) {
+        scoreTrigger.push(scoreName.BLACK_JACK_ATTACK);
+      }
+      if (scoreTrigger.length > 0) {
+        this.$emit("score-and-clear-stack", this.$vnode.key, scoreTrigger);
+      }
     },
   },
   methods: {
+    isBlackJack() {
+      if (this.cards.length > 0) {
+        const lastCardIndex = this.cards.length - 1;
+        return Deck.isABlackJack(this.cards[lastCardIndex]);
+      }
+      return false;
+    },
+
+    isFiveCardCharlie() {
+      return this.cards.length >= 5;
+    },
     moveCardThere() {
       this.$emit("move-card-here", this.$vnode.key);
     },
     getCardValue(card) {
       return cardNumbers[card.cardNumber];
-    },
-    sumOfCards() {
-      let sum = 0;
-      for (let i = 0; i < this.cards.length; i++) {
-        sum += this.getCardValue(this.cards[i]);
-      }
-      return sum;
     },
     clearCards() {
       this.$emit("clear-card-here", this.$vnode.key);

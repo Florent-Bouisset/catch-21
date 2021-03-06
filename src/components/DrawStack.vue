@@ -34,6 +34,10 @@ export default {
     },
   },
   methods: {
+    getNextCard() {
+      const nextCardIndex = this.cards.length - 1;
+      return this.cards[nextCardIndex];
+    },
     getCardValue(card) {
       return cardNumbers[card.cardNumber];
     },
