@@ -16,13 +16,13 @@ export default {
       catch21: 0,
       fiveCardCharlie: 0,
       streak: 0,
-      turnOfLastCombo: null,
+      turnOflastStreak: null,
     };
   },
   methods: {
     isComboStreak(currentTurn) {
-      if (this.turnOfLastCombo === null) return false;
-      if (this.turnOfLastCombo + 1 === currentTurn) return true;
+      if (this.turnOflastStreak === null) return false;
+      if (this.turnOflastStreak + 1 === currentTurn) return true;
       return false;
     },
 
@@ -50,7 +50,7 @@ export default {
         this.streak++;
         scoreToAdd += 25;
       }
-      this.turnOfLastCombo = currentTurn;
+      this.turnOflastStreak = currentTurn;
       this.score += scoreToAdd;
     },
   },
