@@ -7,7 +7,7 @@ export default class Deck {
     constructor() {
         this.cards = [];
         this.create();
-        this.createEasy();
+        // this.createEasy();
     }
 
     create() {

@@ -2,7 +2,7 @@
   <v-container
     class="d-flex flex-row"
     fluid
-    style="background-color: DarkSlateBlue"
+    style="background-color: rgb(107,106,129)"
   >
     <DrawStack :cards="drawStack" ref="drawStack" />
     <DiscardStack
@@ -11,7 +11,7 @@
       @discard-a-card="discardCard()"
     />
     <Score ref="score"></Score>
-    <div class="d-flex flex-row" fluid style="background-color: SeaGreen">
+    <div class="d-flex flex-row" fluid style="background-color: rgb(115,124,104); border: solid rgb(66,63,90); border-radius: 20px; border-width: 4px 8px 8px 4px ">
       <EscapeStack
         v-for="(stack, index) in stacks"
         :key="index"

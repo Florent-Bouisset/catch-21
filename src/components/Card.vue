@@ -1,21 +1,15 @@
 <template>
   <v-card class="pa-0" width="150" height="210" outlined :style="computedStyle">
     <div v-if="isFaceUp === true" class="d-flex flex-row">
-      <h1 class="ma-4">
-        {{ this.textDisplayed }}
-      </h1>
       <v-img
-        class="ma-4"
-        :src="require(`@/assets/colors/${color}.png`)"
-        max-height="72"
-        max-width="48"
+        :src="require(`@/assets/cards/${imagePath}.png`)"
+        max-height="400"
       /><v-img />
     </div>
     <v-img
       v-if="isFaceUp === false"
       :src="require(`@/assets/cards/back.png`)"
-      height="210"
-      width="150"
+      max-height="400"
       contain
     /><v-img />
   </v-card>
@@ -33,6 +27,11 @@ export default {
     offsetY: Number,
   },
   computed: {
+    imagePath() {
+      const colorPath = this.color.toLowerCase();
+      const numberPath = this.cardNumber.toLowerCase()
+      return colorPath + '/' + numberPath;
+    },
     textDisplayed() {
       const mapping = {
         ACE: "1",

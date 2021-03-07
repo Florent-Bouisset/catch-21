@@ -7,7 +7,7 @@
         height: 600px;
         width: 200px;
         cursor: pointer;
-        background-color: DarkOliveGreen;
+        background-color: rgb(143,154,130);
       "
       :style="showErrorOutline ? 'outline: red solid;' : ''"
       @click="moveCardThere()"
