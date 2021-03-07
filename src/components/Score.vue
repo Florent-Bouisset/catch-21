@@ -1,12 +1,12 @@
 <template>
   <v-container>
-    <div>Score :</div>
-    <div>{{ this.score }}</div>
+    <Indicator label="Score" :value="score"></Indicator>
   </v-container>
 </template>
 
 <script>
 import { scoreName } from "@/utils/types.js";
+import Indicator from "@/components/Indicator.vue";
 
 export default {
   data: function () {
@@ -53,6 +53,9 @@ export default {
       this.turnOflastStreak = currentTurn;
       this.score += scoreToAdd;
     },
+  },
+  components: {
+    Indicator,
   },
 };
 </script>

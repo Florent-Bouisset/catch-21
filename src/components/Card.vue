@@ -1,11 +1,10 @@
 <template>
   <v-card class="pa-0" width="150" height="210" outlined :style="computedStyle">
-    <div v-if="isFaceUp === true" class="d-flex flex-row">
       <v-img
+         v-if="isFaceUp === true"
         :src="require(`@/assets/cards/${imagePath}.png`)"
         max-height="400"
       /><v-img />
-    </div>
     <v-img
       v-if="isFaceUp === false"
       :src="require(`@/assets/cards/back.png`)"
@@ -16,7 +15,6 @@
 </template>
 
 <script>
-// import { colors, cardNumbers } from "@/utils/types.js";
 
 export default {
   props: {
@@ -32,28 +30,10 @@ export default {
       const numberPath = this.cardNumber.toLowerCase()
       return colorPath + '/' + numberPath;
     },
-    textDisplayed() {
-      const mapping = {
-        ACE: "1",
-        TWO: "2",
-        THREE: "3",
-        FOUR: "4",
-        FIVE: "5",
-        SIX: "6",
-        SEVEN: "7",
-        HEIGHT: "8",
-        NINE: "9",
-        TEN: "10",
-        JACK: "J",
-        QUEEN: "Q",
-        KING: "K",
-      };
-      return mapping[this.cardNumber];
-    },
     computedStyle() {
       return `position: absolute; top: ${
         this.positionZ * this.offsetY
-      }px; left: 0px`;
+      }px; left: 0px;  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);`;
     },
   },
 };

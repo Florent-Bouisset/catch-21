@@ -2,16 +2,36 @@
   <v-container
     class="d-flex flex-row"
     fluid
-    style="background-color: rgb(107,106,129)"
+    style="background-color: rgb(107, 106, 129)"
   >
-    <DrawStack :cards="drawStack" ref="drawStack" />
-    <DiscardStack
-      :cards="discardStack"
-      ref="discardStack"
-      @discard-a-card="discardCard()"
-    />
-    <Score ref="score"></Score>
-    <div class="d-flex flex-row" fluid style="background-color: rgb(115,124,104); border: solid rgb(66,63,90); border-radius: 20px; border-width: 4px 8px 8px 4px ">
+    <v-col cols="5" class="text-center">
+      <v-img
+        class="justify-center align-center"
+        :src="require(`@/assets/logo.png`)"
+        max-width="500"
+        contain
+      /><v-img />
+      <v-row>
+        <v-col cols="2" />
+        <v-col cols="4">
+          <Timer></Timer>
+        </v-col>
+        <v-col cols="4"> <Score ref="score"></Score> </v-col>
+      </v-row>
+      <v-row>
+        <v-row>
+          <v-col> <DrawStack :cards="drawStack" ref="drawStack" /> </v-col>
+          <v-col>
+            <DiscardStack
+              :cards="discardStack"
+              ref="discardStack"
+              @discard-a-card="discardCard()"
+          /></v-col>
+        </v-row>
+      </v-row>
+    </v-col>
+
+    <div fluid id="greenBoard">
       <EscapeStack
         v-for="(stack, index) in stacks"
         :key="index"
@@ -30,6 +50,7 @@ import EscapeStack from "@/components/EscapeStack.vue";
 import DrawStack from "@/components/DrawStack.vue";
 import DiscardStack from "@/components/DiscardStack.vue";
 import Score from "@/components/Score.vue";
+import Timer from "@/components/Timer.vue";
 
 export default {
   data: function () {
@@ -84,6 +105,18 @@ export default {
     EscapeStack,
     DiscardStack,
     Score,
+    Timer,
   },
 };
 </script>
+
+<style scoped>
+#greenBoard {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(115, 124, 104);
+  border: solid rgb(66, 63, 90);
+  border-radius: 20px;
+  border-width: 4px 8px 8px 4px;
+}
+</style>

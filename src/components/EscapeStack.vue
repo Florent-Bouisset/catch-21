@@ -1,33 +1,47 @@
 <template>
   <v-container>
-    <div
-      style="
-        position: relative;
-        padding-top: 100px;
-        height: 600px;
-        width: 200px;
-        cursor: pointer;
-        background-color: rgb(143,154,130);
-      "
-      :style="showErrorOutline ? 'outline: red solid;' : ''"
-      @click="moveCardThere()"
-    >
-      <GameCard
-        :v-if="cards.length > 0"
-        v-for="(card, index) in cards"
-        :key="index"
-        :positionZ="index"
-        :isFaceUp="true"
-        :cardNumber="card.cardNumber"
-        :color="card.color"
-        :offsetY="60"
-      />
-    </div>
-    <div class="d-flex">
+    <div class="d-flex justify-center">
       <h3 class="pr-2" v-for="(sumPossibility, index) in sums" :key="index">
         <template v-if="index > 0">OR</template>
         {{ sumPossibility }}
       </h3>
+    </div>
+    <div
+      style="
+        justify: center;
+        height: 600px;
+        width: 200px;
+        cursor: pointer;
+        background-color: rgb(143, 154, 130);
+        border-radius: 14px;
+        padding: 25px;
+      "
+      :style="showErrorOutline ? 'box-shadow: 0 0 3pt 2pt red' : ''"
+      @click="moveCardThere()"
+    >
+      <div style="position: relative">
+        <div
+          style="
+            font-size: 22px;
+            font-weight: 800;
+            padding: 20px;
+            text-align: center;
+            color: rgb(170, 183, 154);
+          "
+        >
+          PLAY CARD HERE
+        </div>
+        <GameCard
+          :v-if="cards.length > 0"
+          v-for="(card, index) in cards"
+          :key="index"
+          :positionZ="index"
+          :isFaceUp="true"
+          :cardNumber="card.cardNumber"
+          :color="card.color"
+          :offsetY="60"
+        />
+      </div>
     </div>
   </v-container>
 </template>
@@ -119,3 +133,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+h3 {
+  font-size: 40px;
+  color: white;
+  text-align: center;
+
+}
+</style>
