@@ -5,30 +5,28 @@
     style="background-color: rgb(107, 106, 129)"
   >
     <v-col cols="5" class="text-center">
-      <v-img
-        class="justify-center align-center"
-        :src="require(`@/assets/logo.png`)"
-        max-width="500"
-        contain
-      /><v-img />
-      <v-row>
-        <v-col cols="2" />
-        <v-col cols="4">
-          <Timer></Timer>
-        </v-col>
-        <v-col cols="4"> <Score ref="score"></Score> </v-col>
-      </v-row>
-      <v-row>
-        <v-row>
-          <v-col> <DrawStack :cards="drawStack" ref="drawStack" /> </v-col>
-          <v-col>
-            <DiscardStack
-              :cards="discardStack"
-              ref="discardStack"
-              @discard-a-card="discardCard()"
-          /></v-col>
-        </v-row>
-      </v-row>
+      <div class="d-flex justify-center">
+        <img
+          class="justify-center align-center"
+          :src="require(`@/assets/logo.png`)"
+          max-width="500"
+        /><img />
+      </div>
+      <div
+        class="d-flex flex-row justify-center"
+        style="width: 60%; margin-left: 20%"
+      >
+        <Timer></Timer>
+        <Score ref="score"></Score>
+      </div>
+      <div class="d-flex flex-row justify-center">
+        <DrawStack :cards="drawStack" ref="drawStack" />
+        <DiscardStack
+          :cards="discardStack"
+          ref="discardStack"
+          @discard-a-card="discardCard()"
+        />
+      </div>
     </v-col>
 
     <div fluid id="greenBoard">
