@@ -1,14 +1,12 @@
 <template>
-  <v-card class="pa-0" width="150" height="210" outlined :style="computedStyle">
+  <v-card class="pa-0" width="100%" max-width="220px" outlined :style="computedStyle">
       <v-img
          v-if="isFaceUp === true"
         :src="require(`@/assets/cards/${imagePath}.png`)"
-        max-height="400"
-      /><v-img />
+      />
     <v-img
-      v-if="isFaceUp === false"
+      v-else
       :src="require(`@/assets/cards/back.png`)"
-      max-height="400"
       contain
     /><v-img />
   </v-card>
@@ -23,6 +21,7 @@ export default {
     isFaceUp: Boolean,
     positionZ: Number,
     offsetY: Number,
+    spreadShadow: Boolean
   },
   computed: {
     imagePath() {
@@ -31,9 +30,17 @@ export default {
       return colorPath + '/' + numberPath;
     },
     computedStyle() {
-      return `position: absolute; top: ${
+      let shadowStyle;
+      if (this.spreadShadow) {
+        shadowStyle = 'box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);';
+      } else {
+        shadowStyle = 'box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);';
+      }
+
+      return `position: absolute; border-radius: 14px;
+      top: ${
         this.positionZ * this.offsetY
-      }px; left: 0px;  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);`;
+      }px; left: 0px;  ${shadowStyle}`;
     },
   },
 };

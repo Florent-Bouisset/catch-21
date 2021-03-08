@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="d-flex justify-center">
-      <h3 class="pr-2" v-for="(sumPossibility, index) in sums" :key="index">
+      <h3 v-for="(sumPossibility, index) in sums" :key="index" class="pr-2">
         <template v-if="index > 0">OR</template>
         {{ sumPossibility }}
       </h3>
@@ -21,7 +21,8 @@
           :isFaceUp="true"
           :cardNumber="card.cardNumber"
           :color="card.color"
-          :offsetY="60"
+          :spreadShadow="true"
+          :offsetY="70"
         />
       </div>
     </div>
@@ -133,10 +134,11 @@ h3 {
 
 .cardEmplacement {
   height: 600px;
-  width: 200px;
   cursor: pointer;
   background-color: rgb(143, 154, 130);
   border-radius: 14px;
   padding: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 </style>

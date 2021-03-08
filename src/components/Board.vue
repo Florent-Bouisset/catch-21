@@ -14,7 +14,7 @@
       </div>
       <div
         class="d-flex flex-row justify-center"
-        style="width: 60%; margin-left: 20%"
+        style="width: 100%; padding-left: 20%;  padding-right: 20%;"
       >
         <Timer></Timer>
         <Score ref="score"></Score>
@@ -28,8 +28,7 @@
         />
       </div>
     </v-col>
-
-    <div fluid id="greenBoard">
+    <div fluid id="greenBoard" style="width:100%;">
       <EscapeStack
         v-for="(stack, index) in stacks"
         :key="index"

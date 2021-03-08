@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <Indicator label="Score" :value="score"></Indicator>
   </v-container>
 </template>

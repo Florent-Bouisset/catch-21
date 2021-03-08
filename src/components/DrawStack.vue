@@ -1,24 +1,34 @@
 <template>
   <v-container>
-    <div>Remaining cards : {{ this.remainingCards }}</div>
-
-    <div style="position: relative; margin-top: 100px">
-      <GameCard
-        v-for="(card, index) in cards"
-        :key="index"
-        :positionZ="index"
-        :isFaceUp="index === cards.length - 1"
-        :cardNumber="card.cardNumber"
-        :color="card.color"
-        :offsetY="-2"
-      />
+    <div
+      style="     
+        width: 100%;
+        padding-left: 20%;
+        padding-right: 20%;
+        height: 300px;
+        margin-top: 50px;
+        "
+    >
+      <div style="position: relative">
+        <GameCard
+          v-for="(card, index) in cards"
+          :key="index"
+          :positionZ="index"
+          :isFaceUp="true"
+          :cardNumber="card.cardNumber"
+          :color="card.color"
+          :offsetY="-1"
+        />
+      </div>
     </div>
+    <SoftIndicator label="Left" :value="remainingCards" />
   </v-container>
 </template>
 
 <script>
 import GameCard from "@/components/Card.vue";
 import { cardNumbers } from "@/utils/types.js";
+import SoftIndicator from "@/components/SoftIndicator.vue";
 
 export default {
   props: {
@@ -44,6 +54,7 @@ export default {
   },
   components: {
     GameCard,
+    SoftIndicator,
   },
 };
 </script>
