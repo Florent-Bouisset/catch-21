@@ -38,7 +38,7 @@
         @score-and-clear-stack="scoreAndClear"
       />
     </div>
-    <EndGamePopup @start-new-game="startNewGame" ref="endGameDialog"/>
+    <EndGameDialog @start-new-game="startNewGame" ref="endGameDialog"/>
   </v-container>
 </template>
 
@@ -49,7 +49,7 @@ import DrawStack from "@/components/DrawStack.vue";
 import DiscardStack from "@/components/DiscardStack.vue";
 import Score from "@/components/Score.vue";
 import Timer from "@/components/Timer.vue";
-import EndGamePopup from "@/components/EndGamePopup.vue";
+import EndGameDialog from "@/components/EndGameDialog.vue";
 
 export default {
   data: function () {
@@ -117,7 +117,7 @@ export default {
     DiscardStack,
     Score,
     Timer,
-    EndGamePopup,
+    EndGameDialog,
   },
 };
 </script>
