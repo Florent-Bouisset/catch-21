@@ -30,7 +30,7 @@
 export default {
   data: function () {
     return {
-      dialog: true,
+      dialog: false,
     };
   },
   methods: {
