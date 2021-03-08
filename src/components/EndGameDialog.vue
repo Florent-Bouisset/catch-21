@@ -1,31 +1,24 @@
 <template>
-    <div class="text-center">
-    <v-dialog
-      v-model="dialog"
-      width="500"
-      persistent
-    >
-
-      <v-card>
-        <v-card-title class="headline grey lighten-2">
-            Game Over
-        </v-card-title>
+  <div class="text-center">
+    <v-dialog v-model="dialog" width="500" persistent class="styledPopup">
+      <v-card class="styledPopup">
+        <v-card-title class="headline grey lighten-2"> Game Over </v-card-title>
 
         <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
         </v-card-text>
 
         <v-divider></v-divider>
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            text
-            @click="playAgain"
-          >
-            Play again
-          </v-btn>
+          <v-btn color="primary" text @click="playAgain"> Play again </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -34,22 +27,33 @@
 
 
 <script>
-
-
 export default {
   data: function () {
     return {
-        dialog : true
+      dialog: true,
     };
   },
   methods: {
     showDialog() {
-        this.dialog = true;
+      this.dialog = true;
     },
     playAgain() {
-        this.dialog = false;
-        this.$emit('start-new-game')
-    }
-  }
+      this.dialog = false;
+      this.$emit("start-new-game");
+    },
+  },
 };
 </script>
+
+<style scoped>
+.styledPopup {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: rgb(66, 63, 90) !important;
+  border: solid !important;
+  border-color: rgb(66, 63, 90) !important;
+  background-color: white !important;
+  border-width: 4px 8px 8px 4px !important;
+  border-radius: 20px !important;
+}
+</style>
