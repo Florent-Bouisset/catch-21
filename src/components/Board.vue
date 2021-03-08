@@ -16,11 +16,11 @@
         class="d-flex flex-row justify-center"
         style="width: 100%; padding-left: 20%;  padding-right: 20%;"
       >
-        <Timer></Timer>
+        <Timer @time-is-over="endGame" ref="timer"></Timer>
         <Score ref="score"></Score>
       </div>
       <div class="d-flex flex-row justify-center">
-        <DrawStack :cards="drawStack" ref="drawStack" />
+        <DrawStack :cards="drawStack" ref="drawStack" @no-more-cards="endGame" />
         <DiscardStack
           :cards="discardStack"
           ref="discardStack"
@@ -38,6 +38,7 @@
         @score-and-clear-stack="scoreAndClear"
       />
     </div>
+    <EndGamePopup @start-new-game="startNewGame" ref="endGameDialog"/>
   </v-container>
 </template>
 
@@ -48,6 +49,7 @@ import DrawStack from "@/components/DrawStack.vue";
 import DiscardStack from "@/components/DiscardStack.vue";
 import Score from "@/components/Score.vue";
 import Timer from "@/components/Timer.vue";
+import EndGamePopup from "@/components/EndGamePopup.vue";
 
 export default {
   data: function () {
@@ -96,6 +98,18 @@ export default {
       this.$refs.score.scoreACombo(comboArray, currentTurn);
       this.$set(this.stacks, stackIndex, []);
     },
+    endGame() {
+      this.$refs.endGameDialog.showDialog()
+    },
+    startNewGame(){
+      const deck = new Deck();
+      deck.shuffle();
+      this.drawStack = deck.cards;
+      this.discardStack= [],
+      this.stacks = [[], [], [], []]
+      this.$refs.timer.reset();
+      this.$refs.score.reset();
+    },
   },
   components: {
     DrawStack,
@@ -103,6 +117,7 @@ export default {
     DiscardStack,
     Score,
     Timer,
+    EndGamePopup,
   },
 };
 </script>

@@ -52,6 +52,13 @@ export default {
       return cardNumbers[card.cardNumber];
     },
   },
+  watch: {
+    cards: function() {
+      if (this.cards.length === 0) {
+        this.$emit('no-more-cards');
+      }
+    }
+  },
   components: {
     GameCard,
     SoftIndicator,

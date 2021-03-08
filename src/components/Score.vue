@@ -53,6 +53,14 @@ export default {
       this.turnOflastStreak = currentTurn;
       this.score += scoreToAdd;
     },
+    reset() {
+      this.score = 0,
+      this.blackJack = 0,
+      this.catch21 = 0,
+      this.fiveCardCharlie = 0,
+      this.streak = 0,
+      this.turnOflastStreak = null
+    },
   },
   components: {
     Indicator,
