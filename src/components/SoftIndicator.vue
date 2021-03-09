@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <div>
       <span class="labelIndicator">{{ this.label }}: </span>
       <span class="valueIndicator">{{ this.value }}</span>
@@ -15,12 +15,12 @@ export default {
 
 <style scoped>
 .labelIndicator {
-  font-size: 28px;
+  font-size: 1.4em;
     color: rgb(66, 63, 90);
 
 }
 .valueIndicator {
-  font-size: 28px;
+  font-size: 1.4em;
   font-weight: 800;
   color: white;
 }

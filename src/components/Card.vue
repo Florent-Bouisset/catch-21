@@ -1,5 +1,5 @@
 <template>
-  <v-card class="pa-0" width="100%" max-width="220px" outlined :style="computedStyle">
+  <v-card class="pa-0" width="100%" :max-width="this.maxWidth" outlined :style="computedStyle">
       <v-img
          v-if="isFaceUp === true"
         :src="require(`@/assets/cards/${imagePath}.png`)"
@@ -21,7 +21,9 @@ export default {
     isFaceUp: Boolean,
     positionZ: Number,
     offsetY: Number,
-    spreadShadow: Boolean
+    offsetX: Number,
+    spreadShadow: Boolean,
+    maxWidth: Number
   },
   computed: {
     imagePath() {
@@ -37,10 +39,10 @@ export default {
         shadowStyle = 'box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);';
       }
 
-      return `position: absolute; border-radius: 14px;
+      return `position: absolute; border-radius: 4px;
       top: ${
         this.positionZ * this.offsetY
-      }px; left: 0px;  ${shadowStyle}`;
+      }px; left: ${this.positionZ * this.offsetX}px;  ${shadowStyle}`;
     },
   },
 };

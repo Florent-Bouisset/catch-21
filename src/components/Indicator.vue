@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <div class="labelIndicator">{{this.label}}</div>
     <div class="valueIndicator">{{this.value}}</div>
   </v-container>
@@ -14,17 +14,17 @@ export default {
 
 <style scoped>
 .labelIndicator {
-  font-size: 26px;
+  font-size: 1em;
   color: white;
 }
 .valueIndicator {
-  font-size: 36px;
+  font-size: 1.5em;
   font-weight: 800;
   color: rgb(66, 63, 90);
   border: solid;
   border-color: rgb(66, 63, 90);
   background-color: white;
-  border-width: 4px 8px 8px 4px;
-  border-radius: 20px;
+  border-width: 0.2em 0.3em 0.3em 0.2em;
+  border-radius: 0.8em;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <div
       style="     
         width: 100%;
         padding-left: 20%;
         padding-right: 20%;
-        height: 300px;
+        height: 120px;
         margin-top: 50px;
         "
     >
@@ -21,7 +21,7 @@
         />
       </div>
     </div>
-    <SoftIndicator label="Left" :value="remainingCards" />
+    <SoftIndicator label="Left" :value="remainingCards" class="mt-6" />
   </v-container>
 </template>
 

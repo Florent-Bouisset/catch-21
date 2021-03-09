@@ -1,11 +1,11 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <div
       style="
         width: 100%;
         padding-left: 20%;
         padding-right: 20%;
-        height: 300px;
+        height: 120px;
         margin-top: 50px;
       "
       @click="discard()"
@@ -16,13 +16,12 @@
           style="
             display: flex;
             font-weight: 800;
-                        font-size: 22px;
-
+            font-size: 1em;
             color: rgb(255, 255, 255, 0.3);
             box-shadow: 0 0 0 2px rgb(255, 255, 255, 0.3);
             border-radius: 16px;
-            height: 300px;
-            padding:16px;
+            height: 140px;
+            padding: 16px;
             align-items: center;
           "
         >
@@ -40,7 +39,7 @@
         />
       </div>
     </div>
-    <SoftIndicator label="Discards" :value="remainingCards" />
+    <SoftIndicator label="Discards" :value="remainingCards" class="mt-6" />
   </v-container>
 </template>
 

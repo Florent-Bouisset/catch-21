@@ -1,18 +1,18 @@
 <template>
   <v-app>
     <v-main>
-      <Board></Board>
+      <BoardMobile></BoardMobile>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Board from "./components/Board";
+import BoardMobile from "./components/BoardMobile";
 
 export default {
   name: "App",
 
-  components: { Board },
+  components: { BoardMobile },
 
   data: () => ({
     //

@@ -1,7 +1,7 @@
 <template>
-  <v-container>
-    <div class="d-flex justify-center">
-      <h3 v-for="(sumPossibility, index) in sums" :key="index" class="pr-2">
+  <v-container class="d-flex flex-row pa-1">
+    <div class="d-flex flex-column justify-center align-center" style="width: 75px;">
+      <h3 v-for="(sumPossibility, index) in sums" :key="index" class="pr-1">
         <template v-if="index > 0">OR</template>
         {{ sumPossibility }}
       </h3>
@@ -11,7 +11,7 @@
       :style="showErrorOutline ? 'box-shadow: 0 0 3pt 2pt red' : ''"
       @click="moveCardThere()"
     >
-      <div style="position: relative">
+      <div style="position: relative;">
         <div class="textOnBoard">PLAY CARD HERE</div>
         <GameCard
           :v-if="cards.length > 0"
@@ -22,7 +22,9 @@
           :cardNumber="card.cardNumber"
           :color="card.color"
           :spreadShadow="true"
-          :offsetY="70"
+          :offsetY="0"
+          :offsetX="35"
+          :maxWidth="50" 
         />
       </div>
     </div>
@@ -41,6 +43,7 @@ export default {
   data: function () {
     return {
       showErrorOutline: false,
+      mobile: true,
     };
   },
   components: {
@@ -119,7 +122,7 @@ export default {
 
 <style scoped>
 h3 {
-  font-size: 40px;
+  font-size: 1em;
   color: white;
   text-align: center;
 }
@@ -133,11 +136,12 @@ h3 {
 }
 
 .cardEmplacement {
-  height: 600px;
+  height: 80px;
+  width: 100%;
   cursor: pointer;
   background-color: rgb(143, 154, 130);
   border-radius: 14px;
-  padding: 25px;
+  padding: 4px;
   margin-left: 10px;
   margin-right: 10px;
 }
