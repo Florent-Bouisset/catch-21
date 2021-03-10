@@ -28,6 +28,7 @@
         "
       >
         <div class="textOnBoard">PLAY CARD HERE</div>
+
         <GameCard
           :v-if="cards.length > 0"
           v-for="(card, index) in cards"
@@ -45,7 +46,7 @@
             v-for="(bonus, index) in bonusPaths"
             :key="index"
             style="position: absolute"
-            :src="require(bonus)"
+            :src="require('@/assets/bonus/bonus-5CC.png')"
           ></v-img>
         </template>
       </div>
@@ -66,7 +67,7 @@ export default {
   data: function () {
     return {
       showErrorOutline: false,
-      displayBonus: false,
+            displayBonus: false,
       bonusPaths: [],
     };
   },
@@ -117,7 +118,7 @@ export default {
     },
   },
   methods: {
-    playAnimation(bonusArray) {
+      playAnimation(bonusArray) {
       console.log(bonusArray)
       const bonusPaths = [];
       for (let i = 0; i < bonusArray.length; i++) {
@@ -142,7 +143,7 @@ export default {
       this.displayBonus = true;
       setTimeout(() => {
         this.displayBonus = false;
-      }, 10000);
+      }, 1000);
     },
     isBlackJack() {
       if (this.cards.length > 0) {
@@ -160,6 +161,9 @@ export default {
     },
     getCardValue(card) {
       return cardNumbers[card.cardNumber];
+    },
+    clearCards() {
+      this.$emit("clear-card-here", this.$vnode.key);
     },
     showErrorImpossibleMove() {
       this.showErrorOutline = true;
@@ -196,5 +200,6 @@ h3 {
   background-color: rgb(143, 154, 130);
   border-radius: 14px;
   padding: 4px;
+
 }
 </style>
