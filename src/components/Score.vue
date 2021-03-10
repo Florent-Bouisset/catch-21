@@ -61,6 +61,9 @@ export default {
       this.streak = 0,
       this.turnOflastStreak = null
     },
+    getScore() {
+      return this.$data
+    }
   },
   components: {
     Indicator,

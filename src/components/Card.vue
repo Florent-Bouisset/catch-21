@@ -43,7 +43,7 @@ export default {
         shadowStyle = "box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);";
       }
 
-      return `position: absolute; border-radius: 4px;
+      return `position: absolute; border-radius: 1vh;
       top: ${this.positionZ * this.offsetY}px; left: ${
         this.positionZ * this.offsetX
       }px;  ${shadowStyle}`;

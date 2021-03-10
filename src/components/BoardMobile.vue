@@ -10,7 +10,7 @@
     >
       <div
         class="pa-0 d-flex flex-column"
-        :style="isMobile? 'width: 100%': 'width: 60%'"
+        :style="isMobile ? 'width: 100%' : 'width: 60%'"
       >
         <v-row class="text-center pa-0 ma-0" align="center" justify="center">
           <v-col cols="4" lg="12" class="px-2">
@@ -138,6 +138,8 @@ export default {
       this.$set(this.stacks, stackIndex, []);
     },
     endGame() {
+      const score = this.$refs.score.getScore();
+      this.$refs.endGameDialog.setScore(score);
       this.$refs.endGameDialog.showDialog();
     },
     startNewGame() {

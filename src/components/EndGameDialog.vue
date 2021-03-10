@@ -2,19 +2,31 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500" persistent class="styledPopup">
       <v-card class="styledPopup">
-        <v-card-title class="headline grey lighten-2"> Game Over </v-card-title>
+        <v-card-title class="headline"> Game Over </v-card-title>
 
-        <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+        <v-card-text style="font-size: 1rem;">
+          <ScoreLine
+            name="Catch 21"
+            :numberOfCombo="this.score.catch21"
+            :scoreValue="50"
+          />
+          <ScoreLine
+            name="Black Jack Attack"
+            :numberOfCombo="this.score.blackJack"
+            :scoreValue="75"
+          />
+
+          <ScoreLine
+            name="Five Card Charlie"
+            :numberOfCombo="this.score.fiveCardCharlie"
+            :scoreValue="100"
+          />
+          <ScoreLine name="Streak" :numberOfCombo="this.score.streak" :scoreValue="25" />
+
+          <v-divider></v-divider>
+          <ScoreLine name="Total" :total="true" :scoreValue="this.score.score" />
         </v-card-text>
 
-        <v-divider></v-divider>
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -27,10 +39,13 @@
 
 
 <script>
+import ScoreLine from "@/components/ScoreLine.vue";
+
 export default {
   data: function () {
     return {
       dialog: false,
+      score: Object,
     };
   },
   methods: {
@@ -41,6 +56,12 @@ export default {
       this.dialog = false;
       this.$emit("start-new-game");
     },
+    setScore(score) {
+      this.score = score;
+    },
+  },
+  components: {
+    ScoreLine,
   },
 };
 </script>

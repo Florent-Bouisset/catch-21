@@ -14,7 +14,7 @@
       </div>
       <div
         class="d-flex flex-row justify-center"
-        style="width: 100%; padding-left: 20%;  padding-right: 20%;"
+        style="width: 100%;"
       >
         <Timer @time-is-over="endGame" ref="timer"></Timer>
         <Score ref="score"></Score>
