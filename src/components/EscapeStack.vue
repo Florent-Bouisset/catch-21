@@ -1,12 +1,17 @@
 <template>
-  <v-container class="d-flex flex-row pa-1 ma-0" style="width: 100%; height: 100%">
+  <v-container
+    fluid
+    class="d-flex pa-1 ma-0"
+    :class="mobile ? 'flex-row' : 'flex-column'"
+    style="width: 100%; height: 100%"
+  >
     <div
-      class="d-flex flex-column justify-center align-center"
-      style="width: 75px"
+      class="d-flex flex-column justify-center align-center text-center"
+      :style="mobile ? 'width: 75px;' : 'height: 75px;'"
     >
-      <h3 v-for="(sumPossibility, index) in sums" :key="index" class="pr-1">
-        <template v-if="index > 0">OR</template>
-        {{ sumPossibility }}
+      <h3 class="pr-1">
+        <template> {{ sums[0] }} </template>
+        <template v-if="this.sums.length > 1">OR {{ sums[1] }}</template>
       </h3>
     </div>
     <div
@@ -15,11 +20,11 @@
       @click="moveCardThere()"
     >
       <div
-        style="
-          position: relative;
-          height: 100%;
-          max-width: 12vh;
-          margin-left: 10%;
+        style="position: relative"
+        :style="
+          mobile
+            ? 'height: 100%; width: 12vh; margin-left: 10%;'
+            : 'width: 90%; height: 20vw; margin-left:5%; margin-top:5%;'
         "
       >
         <div class="textOnBoard">PLAY CARD HERE</div>
@@ -33,9 +38,8 @@
           :cardNumber="card.cardNumber"
           :color="card.color"
           :spreadShadow="true"
-          :offsetY="0"
-          :offsetX="35"
-          :maxWidth="50"
+          :offsetY="mobile ? 0 : 100"
+          :offsetX="mobile ? 35 : 0"
         />
       </div>
     </div>
@@ -50,11 +54,11 @@ import Deck from "@/utils/deck";
 export default {
   props: {
     cards: Array,
+    mobile: Boolean,
   },
   data: function () {
     return {
       showErrorOutline: false,
-      mobile: true,
     };
   },
   components: {
@@ -133,7 +137,7 @@ export default {
 
 <style scoped>
 h3 {
-  font-size: 1em;
+  font-size: max(12px, 2vw);
   color: white;
   text-align: center;
 }
@@ -141,12 +145,13 @@ h3 {
 .textOnBoard {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: absolute;
+  width: 100%;
   height: 100%;
-  font-size: 15px;
+  font-size: max(15px, 1vw);
   font-weight: 800;
   padding: 4px;
-  text-align: center;
   color: rgb(170, 183, 154);
 }
 
@@ -157,7 +162,6 @@ h3 {
   background-color: rgb(143, 154, 130);
   border-radius: 14px;
   padding: 4px;
-  margin-left: 10px;
-  margin-right: 10px;
+
 }
 </style>

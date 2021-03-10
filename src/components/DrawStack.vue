@@ -8,7 +8,8 @@
         padding-left:20%;
         "
     >
-      <div style="position: relative; height:15vh; max-width: 15vh; margin-left:10%;"
+      <div style="position: relative; "
+      :style="mobile ? 'height:15vh; max-width: 15vh;' : 'height:30vh; max-width: 30vh;'"
       justify="center">
         <GameCard
 
@@ -34,6 +35,7 @@ import SoftIndicator from "@/components/SoftIndicator.vue";
 export default {
   props: {
     cards: Array,
+    mobile: Boolean,
   },
   computed: {
     nextCardValue() {

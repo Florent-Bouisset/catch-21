@@ -28,7 +28,6 @@ export default {
     offsetY: Number,
     offsetX: Number,
     spreadShadow: Boolean,
-    maxWidth: Number,
   },
   computed: {
     imagePath() {

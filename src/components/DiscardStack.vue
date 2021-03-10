@@ -9,7 +9,14 @@
       "
       @click="discard()"
     >
-      <div style="position: relative; height: 15vh; max-width:15vh; margin-left:10%;">
+      <div
+        style="position: relative;"
+        :style="
+          mobile
+            ? 'height:15vh; max-width: 15vh;'
+            : 'height:30vh; max-width: 30vh;'
+        "
+      >
         <div
           v-if="cards.length === 0"
           style="
@@ -40,7 +47,11 @@
         />
       </div>
     </div>
-    <SoftIndicator label="Discards" :value="remainingCards" class="mt-1 text-center" />
+    <SoftIndicator
+      label="Discards"
+      :value="remainingCards"
+      class="mt-1 text-center"
+    />
   </v-container>
 </template>
 
@@ -51,6 +62,7 @@ import SoftIndicator from "@/components/SoftIndicator.vue";
 export default {
   props: {
     cards: Array,
+    mobile: Boolean,
   },
   computed: {
     remainingCards() {
