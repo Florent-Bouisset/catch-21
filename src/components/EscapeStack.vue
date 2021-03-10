@@ -143,7 +143,7 @@ h3 {
   align-items: center;
   position: absolute;
   height: 100%;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 800;
   padding: 4px;
   text-align: center;
