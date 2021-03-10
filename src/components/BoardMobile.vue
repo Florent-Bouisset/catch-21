@@ -1,47 +1,51 @@
 <template>
-  <v-container fluid style="background-color: rgb(107, 106, 129)">
-    <v-row
-      class="text-center pa-0 ma-0"
-      align="center"
-      justify="center"
-    >
-      <v-col cols="4" class="px-2">
-        <v-img
-          style="max-width: 150px; max-height: 60px; width: auto; height: auto"
-          :src="require(`@/assets/logo.png`)"
-        /><v-img />
-      </v-col>
-      <v-col cols="8" class="pa-0 ma-0">
-        <div class="d-flex flex-row justify-center" style="width: 100%">
-          <Timer @time-is-over="endGame" ref="timer" class="px-2"></Timer>
-          <Score ref="score"></Score>
+  <v-container fluid style="background-color: rgb(107, 106, 129); width:100%;" class="fill-height ma-0 py-0">
+    <div style="height: 100%; width: 100%; display:flex; flex-direction: column;">
+        <div class="pa-0">
+          <v-row class="text-center pa-0 ma-0" align="center" justify="center">
+            <v-col cols="4" class="px-2">
+              <v-img
+                style="
+                  max-width: 150px;
+                  max-height: 60px;
+                  width: auto;
+                  height: auto;
+                "
+                :src="require(`@/assets/logo.png`)"
+              /><v-img />
+            </v-col>
+            <v-col cols="8" class="pa-0 ma-0">
+              <div class="d-flex flex-row justify-center" style="width: 100%">
+                <Timer @time-is-over="endGame" ref="timer" class="px-2"></Timer>
+                <Score ref="score"></Score>
+              </div>
+            </v-col> </v-row
+          ><v-row class="ma-0">
+            <v-col cols="6" class="pa-0">
+              <DrawStack
+                :cards="drawStack"
+                ref="drawStack"
+                @no-more-cards="endGame"
+              /> </v-col
+            ><v-col cols="6" class="pa-0">
+              <DiscardStack
+                :cards="discardStack"
+                ref="discardStack"
+                @discard-a-card="discardCard()"
+              />
+            </v-col>
+          </v-row>
         </div>
-      </v-col>
-      <v-col cols="12" class="ma-0 pa-0">
-        <div class="d-flex flex-row justify-center">
-          <DrawStack
-            :cards="drawStack"
-            ref="drawStack"
-            @no-more-cards="endGame"
+      <div id="greenBoard" class="fill-height">
+          <EscapeStack
+            v-for="(stack, index) in stacks"
+            :key="index"
+            :cards="stack"
+            ref="escapeStacks"
+            @move-card-here="moveACard"
+            @score-and-clear-stack="scoreAndClear"
           />
-          <DiscardStack
-            :cards="discardStack"
-            ref="discardStack"
-            @discard-a-card="discardCard()"
-          />
-        </div>
-      </v-col>
-    </v-row>
-
-    <div fluid id="greenBoard" class="d-flex flex-column">
-      <EscapeStack
-        v-for="(stack, index) in stacks"
-        :key="index"
-        :cards="stack"
-        ref="escapeStacks"
-        @move-card-here="moveACard"
-        @score-and-clear-stack="scoreAndClear"
-      />
+      </div>
     </div>
     <EndGameDialog @start-new-game="startNewGame" ref="endGameDialog" />
   </v-container>
@@ -129,10 +133,11 @@ export default {
 <style scoped>
 #greenBoard {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: rgb(115, 124, 104);
   border: solid rgb(66, 63, 90);
   border-radius: 20px;
+  padding: 6px;
   border-width: 4px 8px 8px 4px;
 }
 </style>

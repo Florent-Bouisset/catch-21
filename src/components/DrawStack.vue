@@ -3,14 +3,15 @@
     <div
       style="     
         width: 100%;
-        padding-left: 20%;
-        padding-right: 20%;
-        height: 120px;
         margin-top: 50px;
+        padding-right:20%;
+        padding-left:20%;
         "
     >
-      <div style="position: relative">
+      <div style="position: relative; height:15vh; max-width: 15vh; margin-left:10%;"
+      justify="center">
         <GameCard
+
           v-for="(card, index) in cards"
           :key="index"
           :positionZ="index"
@@ -21,7 +22,7 @@
         />
       </div>
     </div>
-    <SoftIndicator label="Left" :value="remainingCards" class="mt-6" />
+    <SoftIndicator label="Left" :value="remainingCards" class="mt-1 text-center" />
   </v-container>
 </template>
 

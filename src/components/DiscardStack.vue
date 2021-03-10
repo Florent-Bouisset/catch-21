@@ -5,25 +5,26 @@
         width: 100%;
         padding-left: 20%;
         padding-right: 20%;
-        height: 120px;
         margin-top: 50px;
       "
       @click="discard()"
     >
-      <div style="position: relative">
+      <div style="position: relative; height: 15vh; max-width:15vh; margin-left:10%;">
         <div
           v-if="cards.length === 0"
           style="
+            position: absolute;
             display: flex;
             font-weight: 800;
             font-size: 1em;
             color: rgb(255, 255, 255, 0.3);
             box-shadow: 0 0 0 2px rgb(255, 255, 255, 0.3);
             border-radius: 16px;
-            height: 140px;
+            height: 100%;
             padding: 16px;
             align-items: center;
           "
+          class="text-center"
         >
           CLICK HERE TO DISCARD
         </div>
@@ -39,7 +40,7 @@
         />
       </div>
     </div>
-    <SoftIndicator label="Discards" :value="remainingCards" class="mt-6" />
+    <SoftIndicator label="Discards" :value="remainingCards" class="mt-1 text-center" />
   </v-container>
 </template>
 
