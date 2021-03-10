@@ -28,7 +28,6 @@
         "
       >
         <div class="textOnBoard">PLAY CARD HERE</div>
-
         <GameCard
           :v-if="cards.length > 0"
           v-for="(card, index) in cards"
@@ -41,6 +40,14 @@
           :offsetY="mobile ? 0 : 100"
           :offsetX="mobile ? 35 : 0"
         />
+        <template v-if="displayBonus">
+          <v-img
+            v-for="(bonus, index) in bonusPaths"
+            :key="index"
+            style="position: absolute"
+            :src="require(bonus)"
+          ></v-img>
+        </template>
       </div>
     </div>
   </v-container>
@@ -59,6 +66,8 @@ export default {
   data: function () {
     return {
       showErrorOutline: false,
+      displayBonus: false,
+      bonusPaths: [],
     };
   },
   components: {
@@ -102,11 +111,39 @@ export default {
         scoreTrigger.push(scoreName.BLACK_JACK_ATTACK);
       }
       if (scoreTrigger.length > 0) {
+        this.playAnimation(scoreTrigger);
         this.$emit("score-and-clear-stack", this.$vnode.key, scoreTrigger);
       }
     },
   },
   methods: {
+    playAnimation(bonusArray) {
+      console.log(bonusArray)
+      const bonusPaths = [];
+      for (let i = 0; i < bonusArray.length; i++) {
+        console.log('the bonus is ')
+        console.log(bonusArray[i])
+        switch (bonusArray[i]) {
+          case scoreName.FIVE_CARD_CHARLIE:
+            bonusPaths.push("@/assets/bonus/bonus-5CC.png");
+            break;
+          case scoreName.BLACK_JACK_ATTACK:
+            bonusPaths.push("@/assets/bonus/bonus-BJA.png");
+            break;
+          case scoreName.CATCH_21:
+            bonusPaths.push("@/assets/bonus/bonus-C21.png");
+            break;
+          default:
+            break;
+        }
+      }
+      console.log(bonusPaths);
+      this.bonusPaths = bonusPaths;
+      this.displayBonus = true;
+      setTimeout(() => {
+        this.displayBonus = false;
+      }, 10000);
+    },
     isBlackJack() {
       if (this.cards.length > 0) {
         const lastCardIndex = this.cards.length - 1;
@@ -123,9 +160,6 @@ export default {
     },
     getCardValue(card) {
       return cardNumbers[card.cardNumber];
-    },
-    clearCards() {
-      this.$emit("clear-card-here", this.$vnode.key);
     },
     showErrorImpossibleMove() {
       this.showErrorOutline = true;
@@ -162,6 +196,5 @@ h3 {
   background-color: rgb(143, 154, 130);
   border-radius: 14px;
   padding: 4px;
-
 }
 </style>
