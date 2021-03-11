@@ -41,14 +41,11 @@
           :offsetY="mobile ? 0 : 100"
           :offsetX="mobile ? 35 : 0"
         />
-        <template v-if="displayBonus">
-          <v-img
-            v-for="(bonus, index) in bonusPaths"
-            :key="index"
-            style="position: absolute"
-            :src="require('@/assets/bonus/bonus-5CC.png')"
-          ></v-img>
-        </template>
+
+        <BonusDisplayer
+          :show="displayBonus"
+          :bonuses="bonusArray"
+        ></BonusDisplayer>
       </div>
     </div>
   </v-container>
@@ -56,6 +53,8 @@
 
 <script>
 import GameCard from "@/components/Card.vue";
+import BonusDisplayer from "@/components/BonusDisplayer.vue";
+
 import { cardNumbers, scoreName } from "@/utils/types.js";
 import Deck from "@/utils/deck";
 
@@ -67,12 +66,13 @@ export default {
   data: function () {
     return {
       showErrorOutline: false,
-            displayBonus: false,
-      bonusPaths: [],
+      displayBonus: false,
+      bonusArray: [],
     };
   },
   components: {
     GameCard,
+    BonusDisplayer,
   },
   computed: {
     sums() {
@@ -118,28 +118,8 @@ export default {
     },
   },
   methods: {
-      playAnimation(bonusArray) {
-      console.log(bonusArray)
-      const bonusPaths = [];
-      for (let i = 0; i < bonusArray.length; i++) {
-        console.log('the bonus is ')
-        console.log(bonusArray[i])
-        switch (bonusArray[i]) {
-          case scoreName.FIVE_CARD_CHARLIE:
-            bonusPaths.push("@/assets/bonus/bonus-5CC.png");
-            break;
-          case scoreName.BLACK_JACK_ATTACK:
-            bonusPaths.push("@/assets/bonus/bonus-BJA.png");
-            break;
-          case scoreName.CATCH_21:
-            bonusPaths.push("@/assets/bonus/bonus-C21.png");
-            break;
-          default:
-            break;
-        }
-      }
-      console.log(bonusPaths);
-      this.bonusPaths = bonusPaths;
+    playAnimation(bonusArrayInput) {
+      this.bonusArray = bonusArrayInput;
       this.displayBonus = true;
       setTimeout(() => {
         this.displayBonus = false;
@@ -200,6 +180,5 @@ h3 {
   background-color: rgb(143, 154, 130);
   border-radius: 14px;
   padding: 4px;
-
 }
 </style>
