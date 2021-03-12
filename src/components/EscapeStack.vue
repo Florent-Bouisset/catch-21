@@ -123,7 +123,7 @@ export default {
       this.displayBonus = true;
       setTimeout(() => {
         this.displayBonus = false;
-      }, 1000);
+      }, 1500);
     },
     isBlackJack() {
       if (this.cards.length > 0) {

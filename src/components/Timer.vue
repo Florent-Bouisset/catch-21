@@ -35,8 +35,9 @@ export default {
       }
     },
     reset() {
+      const needRestart = this.timeRemaining === 0;
       this.timeRemaining = minutesToPlay * secondsInMinutes;
-      this.countDownTimer();
+      if( needRestart) this.countDownTimer();
     }
   },
   components: {

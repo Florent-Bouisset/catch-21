@@ -1,44 +1,65 @@
 <template>
   <v-container
-    class="d-flex flex-row"
     fluid
-    style="background-color: rgb(107, 106, 129)"
+    style="background-color: rgb(107, 106, 129); width: 100%"
+    class="fill-height ma-0 py-0"
   >
-    <v-col cols="5" class="text-center">
-      <div class="d-flex justify-center">
-        <img
-          class="justify-center align-center"
-          :src="require(`@/assets/logo.png`)"
-          max-width="500"
-        /><img />
+    <div
+      style="height: 100%; width: 100%; display: flex"
+      class="flex-column flex-lg-row"
+    >
+      <div
+        class="pa-0 d-flex flex-column"
+        :style="isMobile ? 'width: 100%' : 'width: 60%'"
+      >
+        <v-row class="text-center pa-0 ma-0" align="center" justify="center">
+          <v-col cols="4" lg="12" class="px-2">
+            <v-img
+              style="max-width: 400px; width: auto; height: auto; margin: auto"
+              contain
+              :src="require(`@/assets/logo.png`)"
+            /><v-img />
+          </v-col>
+          <v-col cols="8" class="pa-0 ma-0">
+            <div class="d-flex flex-row justify-center" style="width: 100%">
+              <Timer @time-is-over="endGame" ref="timer" class="px-2"></Timer>
+              <Score ref="score"></Score>
+            </div>
+          </v-col> </v-row
+        ><v-row class="ma-0">
+          <v-col cols="6" class="pa-0">
+            <DrawStack
+              :cards="drawStack"
+              :mobile="isMobile"
+              ref="drawStack"
+              @no-more-cards="endGame"
+            /> </v-col
+          ><v-col cols="6" class="pa-0">
+            <DiscardStack
+              :mobile="isMobile"
+              :cards="discardStack"
+              ref="discardStack"
+              @discard-a-card="discardCard()"
+            />
+          </v-col>
+        </v-row>
       </div>
       <div
-        class="d-flex flex-row justify-center"
-        style="width: 100%;"
+        id="greenBoard"
+        :class="isMobile ? 'flex-column fill-height' : 'flex-row ma-4'"
       >
-        <Timer @time-is-over="endGame" ref="timer"></Timer>
-        <Score ref="score"></Score>
-      </div>
-      <div class="d-flex flex-row justify-center">
-        <DrawStack :cards="drawStack" ref="drawStack" @no-more-cards="endGame" />
-        <DiscardStack
-          :cards="discardStack"
-          ref="discardStack"
-          @discard-a-card="discardCard()"
+        <EscapeStack
+          v-for="(stack, index) in stacks"
+          :key="index"
+          :cards="stack"
+          :mobile="isMobile"
+          ref="escapeStacks"
+          @move-card-here="moveACard"
+          @score-and-clear-stack="scoreAndClear"
         />
       </div>
-    </v-col>
-    <div fluid id="greenBoard" style="width:100%;">
-      <EscapeStack
-        v-for="(stack, index) in stacks"
-        :key="index"
-        :cards="stack"
-        ref="escapeStacks"
-        @move-card-here="moveACard"
-        @score-and-clear-stack="scoreAndClear"
-      />
     </div>
-    <EndGameDialog @start-new-game="startNewGame" ref="endGameDialog"/>
+    <EndGameDialog @start-new-game="startNewGame" ref="endGameDialog" />
   </v-container>
 </template>
 
@@ -63,6 +84,24 @@ export default {
     const deck = new Deck();
     deck.shuffle();
     this.drawStack = deck.cards;
+  },
+  computed: {
+    isMobile() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return true;
+        case "sm":
+          return true;
+        case "md":
+          return true;
+        case "lg":
+          return false;
+        case "xl":
+          return false;
+        default:
+          return false;
+      }
+    },
   },
   methods: {
     discardCard() {
@@ -99,14 +138,15 @@ export default {
       this.$set(this.stacks, stackIndex, []);
     },
     endGame() {
-      this.$refs.endGameDialog.showDialog()
+      const score = this.$refs.score.getScore();
+      this.$refs.endGameDialog.setScore(score);
+      this.$refs.endGameDialog.showDialog();
     },
-    startNewGame(){
+    startNewGame() {
       const deck = new Deck();
       deck.shuffle();
       this.drawStack = deck.cards;
-      this.discardStack= [],
-      this.stacks = [[], [], [], []]
+      (this.discardStack = []), (this.stacks = [[], [], [], []]);
       this.$refs.timer.reset();
       this.$refs.score.reset();
     },
@@ -125,10 +165,12 @@ export default {
 <style scoped>
 #greenBoard {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
   background-color: rgb(115, 124, 104);
   border: solid rgb(66, 63, 90);
   border-radius: 20px;
+  padding: 6px;
   border-width: 4px 8px 8px 4px;
 }
 </style>
