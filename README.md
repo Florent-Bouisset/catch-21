@@ -1,5 +1,6 @@
 # catch-21
 
+This project is a single player card game between black jack and solitaire.
 ## Project setup
 ```
 npm install
@@ -7,7 +8,7 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm start
 ```
 
 ### Compiles and minifies for production
